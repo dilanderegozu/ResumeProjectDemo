@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="ViewComponents\DefaultViewComponents\" />
-    <Folder Include="wwwroot\templates\Proje 1 AspNet Core Portfolyo\malat-bootstrap-personal-resume-template-2023-11-27-05-10-34-utc %281%29\malat_main_download\documentation\documentation\images\" />
   </ItemGroup>
 
 </Project>
