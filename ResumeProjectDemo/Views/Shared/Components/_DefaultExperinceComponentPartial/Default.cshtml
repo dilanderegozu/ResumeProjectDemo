@@ -7,51 +7,25 @@
 			<span class="title-letter">D</span>
 		</div>
 
-		<div class="row">
-			<div class="col-lg-4 mb-1 mb-lg-0">
-				<p class="h5 mb-0">Backend Developer</p>
-				<p class="opacity-75">1onbir Grup Bilişim Teknolojileri, 2025</p>
+		@foreach(var item in Model)
+		{
+			<div class="row">
+				<div class="col-lg-4 mb-1 mb-lg-0">
+					<p class="h5 mb-0">@item.Title</p>
+					<p class="opacity-75">@item.WorkDate</p>
+				</div>
+				<div class="col-lg-8">
+					<p>
+						@item.Description
+					</p>
+				</div>
 			</div>
-			<div class="col-lg-8">
-				<p>
-					Node.js, Express ve NestJS kullanarak RESTful ve GraphQL API’ler geliştirdim.
-					JWT tabanlı authentication ve role-based authorization sistemleri kurdum.
-					PostgreSQL ve Prisma ile veritabanı modelleme, query optimizasyonu ve migration işlemleri gerçekleştirdim.
-					Modüler backend mimarisi (controller, service, DTO) oluşturdum ve Socket.io ile real-time özellikler geliştirdim.
-					Swagger ile API dokümantasyonu hazırladım ve Git ile takım çalışmasına katkı sağladım.
-				</p>
-			</div>
-		</div>
 
-		<hr />
+			<hr />
+		}
+		
 
-		<div class="row">
-			<div class="col-lg-4 mb-1 mb-lg-0">
-				<p class="h5 mb-0">Intern Software Developer</p>
-				<p class="opacity-75">Node 101, 2025</p>
-			</div>
-			<div class="col-lg-8">
-				<p>
-					Java ile Object-Oriented Programming (OOP) prensiplerini uyguladım ve algoritmik problemler çözdüm.
-					Küçük ölçekli projeler geliştirerek yazılım mantığımı güçlendirdim ve HTML/CSS ile basit arayüzler oluşturdum.
-				</p>
-			</div>
-		</div>
 
-		<hr />
-
-		<div class="row">
-			<div class="col-lg-4 mb-1 mb-lg-0">
-				<p class="h5 mb-0">Community President</p>
-				<p class="opacity-75">Uludağ Üniversitesi Matematik Topluluğu, 2024 - 2025</p>
-			</div>
-			<div class="col-lg-8">
-				<p>
-					Topluluk etkinliklerini organize ettim ve ekip koordinasyonu sağladım.
-					Proje planlama süreçlerini yönettim ve liderlik, iletişim becerilerimi geliştirdim.
-				</p>
-			</div>
-		</div>
 
 	</div>
 </section>

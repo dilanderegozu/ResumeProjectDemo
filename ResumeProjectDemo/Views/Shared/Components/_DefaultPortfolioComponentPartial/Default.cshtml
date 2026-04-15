@@ -1,262 +1,146 @@
-﻿<section id="portfolio" class="portfolio-modern">
-  <style>
-      .portfolio-modern .section-header {
-    position: relative;
-}
+﻿@model List<ResumeProjectDemo.Entities.Portfolio>
 
-.portfolio-modern .section-header h2 {
-    position: relative;
-    z-index: 1;
-}
+<section id="portfolio">
 
-.portfolio-modern .section-header .title-letter {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    font-size: 120px;
-    font-weight: 800;
-    color: rgba(0, 0, 0, 0.04);
-    line-height: 1;
-    z-index: 0;
-    pointer-events: none;
-    user-select: none;
-}
-        .portfolio-modern {
-            padding: 2rem 0;
-            font-family: var(--font-sans, sans-serif);
-            background: #fff;
-        }
-    .portfolio-modern .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
-    .portfolio-modern .section-header { text-align: center; margin-bottom: 2rem; }
+    @await Component.InvokeAsync("_DefaultCategoryComponentPartial");
 
-            .portfolio-modern .section-title {
-                font-size: 28px;
-                font-weight: 500;
-                color: #232d45;
-                margin-bottom: 1.2rem;
+    <div class="container">
+        <div class="portfolio-container isotope-container row my-n2 mx-sm-n2">
+            @foreach (var item in Model)
+            {
+                <div class="isotope-item col-sm-6 col-lg-4 py-2 px-sm-2 category-@item.CategoryId">
+                    <div class="portfolio-item details-inside">
+                        <a href="@item.ImageUrl" class="image-popup" title="@item.Title">
+                            <div class="item-media">
+                                <img src="@item.ImageUrl" alt="@item.Title" class="img-fluid">
+                            </div>
+                            <div class="item-overlay bg-dark"></div>
+                            <div class="item-details text-center">
+                                <h4 class="h5">@item.Title</h4>
+                                <p class="font-italic">Kategori Adı</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             }
-    .portfolio-modern .filter-nav ul { list-style: none; padding: 0; margin: 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-    .portfolio-modern .filter-nav li a {
-      display: inline-block; padding: 6px 18px; border-radius: 20px; font-size: 13px;
-      text-decoration: none; cursor: pointer; border: 1px solid #3a4460;
-      color: #94a3b8; background: transparent; transition: all 0.2s;
-    }
-    .portfolio-modern .filter-nav li a.active,
-    .portfolio-modern .filter-nav li a:hover { background: #7c6af0; border-color: #7c6af0; color: #fff; }
-    .portfolio-modern .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-    .portfolio-modern .project-card {
-      background: #131929; border: 1px solid #232d45;
-      border-radius: 14px; padding: 22px 22px 18px;
-      display: flex; flex-direction: column; gap: 0;
-      transition: border-color 0.2s;
-    }
-    .portfolio-modern .project-card:hover { border-color: #3a4460; }
-    .portfolio-modern .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-    .portfolio-modern .tech-icons { display: flex; gap: 6px; }
-    .portfolio-modern .tech-icon {
-      width: 32px; height: 32px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 700; color: #fff;
-    }
-    .portfolio-modern .icon-node   { background: #3d8b5e; }
-    .portfolio-modern .icon-ex     { background: #3a3f55; border: 1px solid #555; }
-    .portfolio-modern .icon-mongo  { background: #4a7c3f; }
-    .portfolio-modern .icon-redis  { background: #c0392b; }
-    .portfolio-modern .icon-socket { background: #4a4a4a; border: 1px solid #666; }
-    .portfolio-modern .icon-pg     { background: #336791; }
-    .portfolio-modern .icon-js     { background: #b59a00; }
-    .portfolio-modern .icon-react  { background: #1a6b8a; }
-    .portfolio-modern .icon-css    { background: #264de4; }
-    .portfolio-modern .icon-html   { background: #e34c26; }
-    .portfolio-modern .icon-jwt    { background: #5c2d91; }
-    .portfolio-modern .badge {
-      font-size: 11px; font-weight: 500; padding: 4px 12px; border-radius: 20px; white-space: nowrap;
-    }
-    .portfolio-modern .badge-purple { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
-    .portfolio-modern .badge-green  { background: rgba(52,211,153,0.1);  color: #34d399; border: 1px solid rgba(52,211,153,0.25); }
-    .portfolio-modern .badge-blue   { background: rgba(59,130,246,0.12); color: #60a5fa; border: 1px solid rgba(59,130,246,0.25); }
-    .portfolio-modern .badge-pink   { background: rgba(236,72,153,0.12); color: #f472b6; border: 1px solid rgba(236,72,153,0.25); }
-    .portfolio-modern .badge-orange { background: rgba(251,146,60,0.12); color: #fb923c; border: 1px solid rgba(251,146,60,0.25); }
-    .portfolio-modern .badge-cyan   { background: rgba(34,211,238,0.1);  color: #22d3ee; border: 1px solid rgba(34,211,238,0.25); }
-    .portfolio-modern .card-title { font-size: 18px; font-weight: 500; color: #e2e8f0; margin: 0 0 8px; }
-    .portfolio-modern .card-desc  { font-size: 13px; color: #94a3b8; line-height: 1.6; margin: 0 0 14px; flex: 1; }
-    .portfolio-modern .card-divider { border: none; border-top: 1px solid #1e2a42; margin: 12px 0; }
-    .portfolio-modern .card-links { display: flex; gap: 16px; margin-bottom: 12px; }
-    .portfolio-modern .card-links a { font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 5px; }
-    .portfolio-modern .link-demo { color: #f97316; }
-    .portfolio-modern .link-demo:hover { color: #fb923c; }
-    .portfolio-modern .link-github { color: #60a5fa; }
-    .portfolio-modern .link-github:hover { color: #93c5fd; }
-    .portfolio-modern .card-stack { font-size: 11px; color: #4a5568; margin: 0; line-height: 1.5; }
-
-            .portfolio-modern .section-header {
-                position: relative;
-            }
-
-                .portfolio-modern .section-header h2 {
-                    position: relative;
-                    z-index: 1;
-                }
-
-                .portfolio-modern .section-header .title-letter {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -60%);
-                    font-size: 120px;
-                    font-weight: 800;
-                    color: rgba(0, 0, 0, 0.04);
-                    line-height: 1;
-                    z-index: 0;
-                    pointer-events: none;
-                    user-select: none;
-                }
-  </style>
-
-  <div class="container">
-    <div class="section-header">
-            <h2 class="mb-0">Projeler</h2>
-            <span class="title-letter">P</span>
-      <nav class="filter-nav">
-        <ul>
-          <li><a href="#" class="active" data-filter="all">Tümü</a></li>
-          <li><a href="#" data-filter="backend">Backend</a></li>
-          <li><a href="#" data-filter="web">Web</a></li>
-          <li><a href="#" data-filter="fullstack">Full Stack</a></li>
-        </ul>
-      </nav>
+        </div>
     </div>
-
-    <div class="cards-grid" id="portfolio-grid">
-
-      <div class="project-card" data-cats="backend fullstack">
-        <div class="card-top">
-          <div class="tech-icons">
-            <span class="tech-icon icon-node">N</span>
-            <span class="tech-icon icon-ex">Ex</span>
-            <span class="tech-icon icon-mongo">M</span>
-            <span class="tech-icon icon-redis">R</span>
-            <span class="tech-icon icon-socket">S</span>
-          </div>
-          <span class="badge badge-purple">Backend / Real-Time</span>
-        </div>
-        <h3 class="card-title">Cafe Master</h3>
-        <p class="card-desc">Restaurant management için geliştirilen production-ready backend sistem. Real-time özellikler, Redis caching ve transaction-safe operasyonlar içerir.</p>
-        <hr class="card-divider">
-        <div class="card-links">
-          <a class="link-demo" href="https://cafe-master.onrender.com" target="_blank">↗ Live Demo</a>
-          <a class="link-github" href="https://github.com/dilanderegozu" target="_blank">⌥ GitHub Repo</a>
-        </div>
-        <p class="card-stack">Node.js, Express.js, MongoDB, Mongoose, Redis, Socket.io, JWT, REST API</p>
-      </div>
-
-      <div class="project-card" data-cats="backend">
-        <div class="card-top">
-          <div class="tech-icons">
-            <span class="tech-icon icon-node">N</span>
-            <span class="tech-icon icon-ex">Ex</span>
-            <span class="tech-icon icon-pg">Pg</span>
-            <span class="tech-icon icon-js">JS</span>
-          </div>
-          <span class="badge badge-green">API Development</span>
-        </div>
-        <h3 class="card-title">QR Code Based Attendance</h3>
-        <p class="card-desc">Uludağ Üniversitesi Matematik Bölümü için geliştirilen QR tabanlı yoklama sistemi. Güvenli authentication ve PostgreSQL entegrasyonu içerir.</p>
-        <hr class="card-divider">
-        <div class="card-links">
-          <a class="link-github" href="https://github.com/dilanderegozu/Attendq-qr" target="_blank">⌥ GitHub Repo</a>
-        </div>
-        <p class="card-stack">Node.js, Express.js, PostgreSQL, JavaScript</p>
-      </div>
-
-      <div class="project-card" data-cats="backend">
-        <div class="card-top">
-          <div class="tech-icons">
-            <span class="tech-icon icon-node">N</span>
-            <span class="tech-icon icon-ex">Ex</span>
-            <span class="tech-icon icon-mongo">M</span>
-            <span class="tech-icon icon-jwt">J</span>
-          </div>
-          <span class="badge badge-blue">REST API</span>
-        </div>
-        <h3 class="card-title">E-Commerce Backend</h3>
-        <p class="card-desc">JWT authentication, ürün yönetimi ve sipariş süreçlerini içeren e-ticaret backend sistemi.</p>
-        <hr class="card-divider">
-        <div class="card-links">
-          <a class="link-github" href="https://github.com/dilanderegozu/e-commerce" target="_blank">⌥ GitHub Repo</a>
-        </div>
-        <p class="card-stack">Node.js, Express.js, MongoDB, Mongoose, JWT, bcrypt</p>
-      </div>
-
-      <div class="project-card" data-cats="web fullstack">
-        <div class="card-top">
-          <div class="tech-icons">
-            <span class="tech-icon icon-react">R</span>
-            <span class="tech-icon icon-js">JS</span>
-            <span class="tech-icon icon-css">CSS</span>
-          </div>
-          <span class="badge badge-pink">Frontend</span>
-        </div>
-        <h3 class="card-title">Digital Wedding Invitation</h3>
-        <p class="card-desc">Geri sayım, konum entegrasyonu ve responsive tasarım içeren modern dijital davetiye platformu.</p>
-        <hr class="card-divider">
-        <div class="card-links">
-          <a class="link-demo" href="https://dijitalwedding.com" target="_blank">↗ Live Demo</a>
-        </div>
-        <p class="card-stack">React, JavaScript, CSS, Responsive Design</p>
-      </div>
-
-      <div class="project-card" data-cats="web">
-        <div class="card-top">
-          <div class="tech-icons">
-            <span class="tech-icon icon-react">R</span>
-            <span class="tech-icon icon-js">JS</span>
-            <span class="tech-icon icon-css">CSS</span>
-          </div>
-          <span class="badge badge-orange">Corporate UI</span>
-        </div>
-        <h3 class="card-title">Yunus Medya</h3>
-        <p class="card-desc">Bir medya şirketinin hizmetlerini ve kurumsal yapısını tanıtmak için geliştirilmiş kurumsal web sitesi.</p>
-        <hr class="card-divider">
-        <div class="card-links">
-          <a class="link-demo" href="https://yunusmedya.com.tr" target="_blank">↗ Live Demo</a>
-        </div>
-        <p class="card-stack">React, JavaScript, CSS, UI/UX</p>
-      </div>
-
-      <div class="project-card" data-cats="web">
-        <div class="card-top">
-          <div class="tech-icons">
-            <span class="tech-icon icon-html">H</span>
-            <span class="tech-icon icon-css">CSS</span>
-            <span class="tech-icon icon-js">JS</span>
-          </div>
-          <span class="badge badge-cyan">EdTech UI</span>
-        </div>
-        <h3 class="card-title">Sihirli Matematik</h3>
-        <p class="card-desc">Çocukların matematiği daha ilgi çekici ve erişilebilir şekilde öğrenmesi için tasarlanmış eğitim odaklı web sitesi.</p>
-        <hr class="card-divider">
-        <div class="card-links">
-          <a class="link-demo" href="https://sihirlimatematikastamonu.com.tr" target="_blank">↗ Live Demo</a>
-        </div>
-        <p class="card-stack">HTML, CSS, JavaScript, Responsive Design, UI/UX</p>
-      </div>
-
-    </div>
-  </div>
-
-  <script>
-    document.querySelectorAll('.portfolio-modern .filter-nav a').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelectorAll('.portfolio-modern .filter-nav a').forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        const filter = link.dataset.filter;
-        document.querySelectorAll('#portfolio-grid .project-card').forEach(card => {
-          card.style.display = (filter === 'all' || card.dataset.cats.includes(filter)) ? 'flex' : 'none';
-        });
-      });
-    });
-  </script>
 </section>
+
+<!-- Popup için gerekli CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+
+<style>
+    /* PORTFOLIO GRID EFFECT */
+    .portfolio-item .item-media img {
+        width: 100%;
+        transition: transform .3s ease;
+    }
+
+    .portfolio-item:hover .item-media img {
+        transform: scale(1.05);
+    }
+
+    .item-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: .3s ease;
+    }
+
+    .portfolio-item:hover .item-overlay {
+        opacity: .5;
+        background: #000;
+    }
+
+    /* POPUP BACKGROUND*/
+    .mfp-bg {
+        background: rgba(0,0,0,0.85) !important;
+    }
+
+    /* POPUP IMAGE */
+    .mfp-img {
+        max-width: 90% !important;
+        max-height: 80vh !important;
+        object-fit: contain;
+        border-radius: 6px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.7);
+    }
+
+    /* POPUP CONTENT CENTER */
+    .mfp-content {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* TITLE UNDER IMAGE */
+    .mfp-title {
+        color: #fff;
+        font-size: 18px;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /* NEXT / PREV ARROWS */
+    .mfp-arrow {
+        opacity: 0.9;
+        background: rgba(0,0,0,0.55);
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        position: fixed !important;
+        top: 50% !important;
+        transform: translateY(-50%);
+    }
+
+        .mfp-arrow:hover {
+            background: rgba(0,0,0,0.85);
+            opacity: 1;
+        }
+
+    .mfp-arrow-left {
+        left: 25px;
+    }
+
+    .mfp-arrow-right {
+        right: 25px;
+    }
+
+    /* COUNTER */
+    .mfp-counter {
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 8px;
+    }
+</style>
+
+<!-- jQuery + Magnific Popup JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+
+<!-- Gallery Popup Script -->
+<script>
+    $(document).ready(function() {
+        $('.image-popup').magnificPopup({
+            type: 'image',
+            gallery: {
+                enabled: true,
+                tPrev: 'Önceki',
+                tNext: 'Sonraki',
+                tCounter: '<span class="mfp-counter">%curr% / %total%</span>'
+            },
+            image: {
+                titleSrc: 'title'
+            },
+            zoom: {
+                enabled: true,
+                duration: 300
+            }
+        });
+    });
+</script>
