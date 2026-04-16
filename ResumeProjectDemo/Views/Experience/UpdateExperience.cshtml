@@ -1,0 +1,103 @@
+﻿@model ResumeProjectDemo.Entities.Experience
+@{
+    ViewData["Title"] = "UpdateExperience";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-3xl mx-auto space-y-8">
+
+        <!-- Page Heading -->
+        <div class="flex items-center gap-4">
+            <a href="/Experience/ExperienceList"
+               class="flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-[#3b4d54] hover:bg-slate-100 dark:hover:bg-[#1c2427] transition">
+                <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+            </a>
+            <div>
+                <h3 class="text-3xl font-black tracking-tight">Deneyim Güncelle</h3>
+                <p class="text-slate-500 dark:text-[#9db2b9] mt-0.5 text-sm">Deneyim bilgilerinizi güncelleyin</p>
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="bg-white dark:bg-[#111618] rounded-xl border border-slate-200 dark:border-[#3b4d54] shadow-sm p-8">
+            <form asp-action="UpdateExperience" asp-controller="Experience" method="post" class="space-y-6">
+
+                <!-- Hidden Id -->
+                <input asp-for="ExperienceId" type="hidden" />
+
+                <!-- Hata Mesajı -->
+                @if (ViewBag.Error != null)
+                {
+                    <div class="flex items-center gap-2 px-4 py-3 bg-red-500/10 border border-red-500/30 rounded-lg text-red-400 text-sm font-semibold">
+                        <span class="material-symbols-outlined text-[18px]">error</span>
+                        @ViewBag.Error
+                    </div>
+                }
+
+                <!-- Title -->
+                <div class="space-y-1.5">
+                    <label class="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                        Şirket Adı - Unvan <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="Title"
+                           type="text"
+                           class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-[#3b4d54] bg-transparent dark:bg-[#1c2427] text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 transition" />
+                </div>
+
+                <!-- WorkDate -->
+                <div class="space-y-1.5">
+                    <label class="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                        Çalışma Tarihi <span class="text-red-500">*</span>
+                    </label>
+                    <input asp-for="WorkDate"
+                           type="text"
+                           placeholder="Örn: 2020 - 2023"
+                           class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-[#3b4d54] bg-transparent dark:bg-[#1c2427] text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 transition placeholder:text-slate-400 dark:placeholder:text-[#4a6470]" />
+                </div>
+
+                <!-- Description -->
+                <div class="space-y-1.5">
+                    <label class="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                        Açıklama <span class="text-red-500">*</span>
+                    </label>
+                    <textarea asp-for="Description"
+                              rows="6"
+                              placeholder="Pozisyon hakkında detaylı bilgi, görev ve sorumluluklar..."
+                              class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-[#3b4d54] bg-transparent dark:bg-[#1c2427] text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 transition resize-none placeholder:text-slate-400 dark:placeholder:text-[#4a6470]"></textarea>
+                    <p class="text-xs text-slate-400 dark:text-[#4a6470]">İş deneyiminiz hakkında detaylı bilgi verin</p>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex gap-3 pt-2">
+                    <button type="submit"
+                            class="flex items-center gap-2 px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-white rounded-lg font-bold text-sm transition-colors">
+                        <span class="material-symbols-outlined text-[18px]">save</span>
+                        Güncelle
+                    </button>
+                    <a href="/Experience/ExperienceList"
+                       class="flex items-center gap-2 px-6 py-2.5 bg-slate-100 dark:bg-[#1c2427] border border-slate-200 dark:border-[#3b4d54] text-slate-700 dark:text-slate-300 rounded-lg font-bold text-sm hover:opacity-80 transition-opacity">
+                        <span class="material-symbols-outlined text-[18px]">close</span>
+                        İptal
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function (e) {
+        let valid = true;
+        this.querySelectorAll('input:not([type=hidden]), textarea').forEach(function (el) {
+            if (!el.value.trim()) {
+                el.classList.add('border-red-500');
+                valid = false;
+            } else {
+                el.classList.remove('border-red-500');
+            }
+        });
+        if (!valid) e.preventDefault();
+    });
+</script>
