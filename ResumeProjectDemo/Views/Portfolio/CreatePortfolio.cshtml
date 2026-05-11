@@ -1,0 +1,315 @@
+﻿@model ResumeProjectDemo.Entities.Portfolio
+@{
+    ViewData["Title"] = "CreatePortfolio";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+
+
+<style>
+    :root {
+        --bg-card: #1a2332;
+        --bg-input: #243447;
+        --accent: #00d9ff;
+        --accent-purple: #7c3aed;
+        --text: #e8ecf2;
+        --text-muted: #94a3b8;
+        --success: #10b981;
+        --border: rgba(255,255,255,0.1);
+    }
+
+    .portfolio-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .page-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .page-title {
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+    }
+
+    .form-card {
+        background: var(--bg-card);
+        border-radius: 20px;
+        padding: 2.5rem;
+        border: 1px solid var(--border);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .form-group {
+        margin-bottom: 2rem;
+    }
+
+    .form-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text);
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .label-icon {
+        font-size: 1.2rem;
+    }
+
+    .required {
+        color: #ef4444;
+        margin-left: 0.25rem;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        background: var(--bg-input);
+        border: 2px solid var(--border);
+        border-radius: 12px;
+        color: var(--text);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: inherit;
+    }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(0, 217, 255, 0.05);
+            box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+    .input-hint {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        color: var(--text-muted);
+        font-size: 0.813rem;
+    }
+
+    .char-counter {
+        margin-left: auto;
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border);
+    }
+
+    .btn {
+        flex: 1;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        border: none;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+        color: white;
+        box-shadow: 0 4px 20px rgba(0, 217, 255, 0.3);
+    }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(0, 217, 255, 0.4);
+        }
+
+    .btn-secondary {
+        background: var(--bg-input);
+        color: var(--text);
+        border: 2px solid var(--border);
+    }
+
+        .btn-secondary:hover {
+            background: rgba(148, 163, 184, 0.1);
+            border-color: var(--text-muted);
+        }
+
+    .btn:active {
+        transform: translateY(0);
+    }
+
+    .info-box {
+        background: rgba(0, 217, 255, 0.05);
+        border: 1px solid rgba(0, 217, 255, 0.2);
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin-bottom: 2rem;
+        display: flex;
+        gap: 1rem;
+        align-items: start;
+    }
+
+    .info-icon {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .info-content {
+        flex: 1;
+    }
+
+    .info-title {
+        color: var(--accent);
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    .info-text {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    @@media (max-width: 768px) {
+        .form-card {
+            padding: 1.5rem;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<div class="portfolio-container">
+    <div class="page-header text-center">
+        <h1 class="page-title">🎨 Yeni Portfolio Ekle</h1>
+        <p class="page-subtitle">Projelerinizi kategorize ederek sergileyin</p>
+    </div>
+
+    <div class="form-card">
+        <form method="post">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="form-group">
+                    <label class="form-label">📝 Proje Başlığı <span class="required">*</span></label>
+                    <input type="text" asp-for="Title" class="form-input" placeholder="Örn: E-Ticaret Arayüzü" maxlength="100" required oninput="updateCharCount(this)" />
+                    <div class="input-hint">
+                        <span class="char-counter" id="charCounter">0/100</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">📂 Kategori Seçimi <span class="required">*</span></label>
+                    <div style="position: relative;">
+                        <select asp-for="CategoryId" asp-items="ViewBag.v" class="form-select" required>
+                            <option value="" disabled selected>Kategori Seçin...</option>
+                        </select>
+                        <span style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--accent);">▼</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">🖼️ Proje Görsel URL</label>
+                <input type="text" asp-for="ImageUrl" id="imageUrlInput" class="form-input" placeholder="https://resim-adresi.com/proje.jpg" oninput="previewImage(this)" />
+                <div class="input-hint">💡 Resim linkini yapıştırdığınızda önizleme aşağıda görünecektir.</div>
+            </div>
+
+            <div class="image-preview-container" id="previewContainer">
+                <span id="previewPlaceholder" style="color: var(--text-muted); font-size: 0.8rem;">Görsel Önizlemesi</span>
+                <img id="imagePreview" src="#" alt="Önizleme" />
+            </div>
+
+            <div class="form-actions">
+                <a href="/Portfolio/PortfolioList" class="btn btn-secondary">
+                    ❌ İptal
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    ✅ Projeyi Kaydet
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function updateCharCount(input) {
+        const counter = document.getElementById('charCounter');
+        const length = input.value.length;
+        counter.textContent = length + '/100';
+
+        if (length > 80) {
+            counter.style.color = '#ef4444';
+        } else if (length > 50) {
+            counter.style.color = '#f59e0b';
+        } else {
+            counter.style.color = 'var(--accent)';
+        }
+    }
+
+    // Sayfa yüklendiğinde karakter sayacını güncelle
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.querySelector('input[asp-for="Title"]');
+        if (input && input.value) {
+            updateCharCount(input);
+        }
+    });
+</script>
+
+<script>
+    // Karakter Sayacı
+    function updateCharCount(input) {
+        const counter = document.getElementById('charCounter');
+        const length = input.value.length;
+        counter.textContent = length + '/100';
+        counter.style.color = length > 80 ? '#ef4444' : 'var(--accent)';
+    }
+
+    // Görsel Önizleme
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const placeholder = document.getElementById('previewPlaceholder');
+        const container = document.getElementById('previewContainer');
+
+        if (input.value && input.value.trim() !== "") {
+            preview.src = input.value;
+            preview.style.display = 'block';
+            placeholder.style.display = 'none';
+            container.style.borderStyle = 'solid';
+            container.style.borderColor = 'var(--accent)';
+        } else {
+            preview.style.display = 'none';
+            placeholder.style.display = 'block';
+            container.style.borderStyle = 'dashed';
+            container.style.borderColor = 'var(--border)';
+        }
+    }
+</script>
