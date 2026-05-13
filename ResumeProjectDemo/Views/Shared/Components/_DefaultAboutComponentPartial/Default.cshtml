@@ -1,43 +1,352 @@
-﻿<section id="about">
-	<div class="container">
-		<div class="section-title h2 text-center mb-8">
-			<h2 class="mb-0">Hakkımda</h2>
-			<span class="title-letter">H</span>
-		</div>
-		<div class="row">
-			<div class="col-md-6 col-lg-4 d-none d-lg-block">
-				<img class="img-fluid w-100 rounded" src="/templates/demo/images/dilan.jpg" alt="Dilan Deregözü">
-			</div>
-			<div class="col-lg-8">
-				<h3>Dilan Deregözü</h3>
-				<p class="lead">Backend Developer</p>
-				<p class="mb-5">
-					Uludağ Üniversitesi Matematik Bölümü öğrencisiyim ve yazılım alanında özellikle backend geliştirme üzerine ilerliyorum.
-					JavaScript ile aktif olarak projeler geliştiriyor; Node.js, Express, NestJS ve PostgreSQL teknolojileriyle çalışıyorum.
-					Aynı zamanda .NET ekosisteminde ASP.NET Core ve ASP.NET MVC ile backend geliştirme üzerine çalışmalar yapıyorum.
-					API geliştirme, veritabanı yönetimi, modüler proje yapıları ve gerçek dünya problemlerine yazılım çözümleri üretme konularına odaklanıyorum.
-					Aynı zamanda kendimi frontend tarafında geliştirerek farklı alanlarda da deneyim kazanmaya devam ediyorum.
-				</p>
-				<div class="row mb-8">
-					<div class="col-md-6 mb-5 mb-md-0">
-						<h4 class="mb-4">Eğitim</h4>
-						<p class="h5">Matematik Bölümü</p>
-						<p>Uludağ Üniversitesi</p>
-						<p class="h5">Hazırlık Eğitimi</p>
-						<p>İzmir Yüksek Teknoloji Enstitüsü</p>
-					</div>
+﻿@model List<ResumeProjectDemo.Entities.About>
 
-					<div class="col-md-6">
-						<h4 class="mb-4">Uzmanlık Alanları</h4>
-						<p class="h5">Backend Development</p>
-						<p>ASP.NET Core, ASP.NET MVC, Node.js, Express, NestJS, REST API</p>
-						<p class="h5">Database & Project Structure</p>
-						<p>PostgreSQL, modüler yapı, service-controller mimarisi</p>
-					</div>
-				</div>
-				<a href="#" class="btn btn-primary">CV İndir</a>
-				<a href="#contact" class="btn btn-light scrollto">Mesaj Gönder</a>
-			</div>
-		</div>
-	</div>
+<style>
+    #about {
+        padding: 60px 0;
+        font-family: var(--font-sans, 'Segoe UI', sans-serif);
+    }
+
+    #about .section-label {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #6c757d;
+        margin-bottom: 6px;
+    }
+
+    #about .section-heading {
+        font-size: 28px;
+        font-weight: 600;
+        color: #111;
+        margin: 0 0 6px;
+    }
+
+    #about .section-sub {
+        font-size: 15px;
+        color: #6c757d;
+        margin: 0 0 2.5rem;
+    }
+
+    #about .about-grid {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 2.5rem;
+        align-items: start;
+    }
+
+    #about .avatar-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    #about .avatar-circle {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: #e8f0fe;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        font-weight: 600;
+        color: #1a56db;
+        border: 1px solid #d0dff8;
+    }
+
+    #about .avatar-img {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid #e0e0e0;
+    }
+
+    #about .name-block {
+        text-align: center;
+    }
+
+    #about .name-block h2 {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0;
+        color: #111;
+    }
+
+    #about .name-block p {
+        font-size: 13px;
+        color: #6c757d;
+        margin: 4px 0 0;
+    }
+
+    #about .btn-row {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+
+    #about .btn-primary-custom {
+        background: #e8f0fe;
+        color: #1a56db;
+        border: 1px solid #c3d4f8;
+        border-radius: 20px;
+        padding: 9px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-decoration: none;
+        transition: background .2s;
+    }
+
+    #about .btn-primary-custom:hover {
+        background: #d0e2fc;
+        color: #1a56db;
+    }
+
+    #about .btn-outline-custom {
+        background: transparent;
+        color: #444;
+        border: 1px solid #d0d0d0;
+        border-radius: 20px;
+        padding: 9px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-decoration: none;
+        transition: background .2s, color .2s;
+    }
+
+    #about .btn-outline-custom:hover {
+        background: #f5f5f5;
+        color: #111;
+    }
+
+    #about .content-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    #about .desc-block {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.8;
+        border-left: 2px solid #1a56db;
+        padding-left: 14px;
+        margin: 0;
+    }
+
+    #about .cards-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+    }
+
+    #about .info-card {
+        background: #fff;
+        border: 1px solid #ebebeb;
+        border-radius: 14px;
+        padding: 1.1rem 1.25rem;
+    }
+
+    #about .card-header-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    #about .card-header-row i {
+        font-size: 18px;
+        color: #1a56db;
+    }
+
+    #about .card-header-row span {
+        font-size: 12px;
+        font-weight: 600;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+    }
+
+    #about .entry {
+        margin-bottom: 14px;
+    }
+
+    #about .entry:last-child {
+        margin-bottom: 0;
+    }
+
+    #about .entry-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #111;
+        margin: 0 0 4px;
+    }
+
+    #about .entry-meta {
+        font-size: 12px;
+        color: #888;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    #about .entry-desc {
+        font-size: 13px;
+        color: #666;
+        margin: 4px 0 0;
+        line-height: 1.6;
+    }
+
+    #about .card-divider {
+        border: none;
+        border-top: 1px solid #f0f0f0;
+        margin: 12px 0;
+    }
+
+    @@media (max-width: 768px) {
+        #about .about-grid {
+            grid-template-columns: 1fr;
+        }
+
+        #about .avatar-col {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #about .cards-row {
+            grid-template-columns: 1fr;
+        }
+
+        #about .btn-row {
+            flex-direction: row;
+            justify-content: center;
+        }
+    }
+</style>
+
+<section id="about">
+    <div class="container">
+
+        <p class="section-label">Portfolyo</p>
+        <h2 class="section-heading">Hakkımda</h2>
+        <p class="section-sub">Yazılım geliştirme, backend teknolojileri ve modern web uygulamaları üzerine çalışıyorum.</p>
+
+        @foreach (var x in Model)
+        {
+            <div class="about-grid">
+
+                <!-- SOL: Avatar + İsim + Butonlar -->
+                <div class="avatar-col">
+
+                    @if (string.IsNullOrEmpty(x.ImageUrl))
+                    {
+
+                        <img src="/templates/demo/images/dilan.jpg"
+                             class="avatar-img"
+                             alt="@x.NameSurname" />
+                    }
+                    else
+                    {
+                        <div class="avatar-circle">
+                            @(string.Concat(x.NameSurname?.Split(' ').Where(w => w.Length > 0).Take(2).Select(w => w[0].ToString().ToUpper())))
+                        </div>
+                    }
+
+                    <div class="name-block">
+                        <h2>@x.NameSurname</h2>
+                        <p>@x.Title</p>
+                    </div>
+
+                    <div class="btn-row">
+                        <a href="~/lib/dilan deregözü cv (1).pdf"
+                           download
+                           class="btn-primary-custom">
+                            <i class="ti ti-download" aria-hidden="true"></i>
+                            CV İndir
+                        </a>
+                        <a href="#contact"
+                           class="btn-outline-custom scrollto">
+                            <i class="ti ti-mail" aria-hidden="true"></i>
+                            Bana Yazın
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- SAĞ: Açıklama + Kartlar -->
+                <div class="content-col">
+
+                    <p class="desc-block">@x.Description</p>
+
+                    <div class="cards-row">
+
+                        <!-- Eğitim Kartı -->
+                        <div class="info-card">
+                            <div class="card-header-row">
+                                <i class="ti ti-school" aria-hidden="true"></i>
+                                <span>Eğitim</span>
+                            </div>
+
+                            <div class="entry">
+                                <p class="entry-title">@x.EducationTitle1</p>
+                                <p class="entry-meta">
+                                    <i class="ti ti-calendar" style="font-size:13px" aria-hidden="true"></i>
+                                    @x.EducationDate1
+                                </p>
+                            </div>
+
+                            <hr class="card-divider" />
+
+                            <div class="entry">
+                                <p class="entry-title">@x.EducationTitle2</p>
+                                <p class="entry-meta">
+                                    <i class="ti ti-calendar" style="font-size:13px" aria-hidden="true"></i>
+                                    @x.EducationDate2
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Deneyim Kartı -->
+                        <div class="info-card">
+                            <div class="card-header-row">
+                                <i class="ti ti-briefcase" aria-hidden="true"></i>
+                                <span>Deneyim</span>
+                            </div>
+
+                            <div class="entry">
+                                <p class="entry-title">@x.SummaryExperienceTitle1</p>
+                                <p class="entry-desc">@x.SummaryExperienceDesc1</p>
+                            </div>
+
+                            <hr class="card-divider" />
+
+                            <div class="entry">
+                                <p class="entry-title">@x.SummaryExperienceTitle2</p>
+                                <p class="entry-desc">@x.SummaryExperienceDesc2</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        }
+
+    </div>
 </section>
+

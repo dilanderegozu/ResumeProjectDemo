@@ -17,3 +17,29 @@
 
 <!-- Theme JS -->
 <script src="/templates/assets/js/main.js"></script>
+<script>
+    $(document).ready(function () {
+
+    $("#vegas-slider-target").vegas({
+
+    slides: [
+    { src: "/templates/demo/images/1.png" },
+    { src: "/templates/demo/images/2.png" },
+    { src: "/templates/demo/images/3.png" }
+    ],
+
+    transition: "fade2",
+    transitionDuration: 4000,
+
+    delay: 7000,
+
+    animation: "kenburns",
+    animationDuration: 12000,
+
+    timer: false,
+    shuffle: true
+
+    });
+
+    });
+</script>

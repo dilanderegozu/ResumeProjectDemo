@@ -16,8 +16,10 @@
                             </div>
                             <div class="item-overlay bg-dark"></div>
                             <div class="item-details text-center">
-                                <h4 class="h5">@item.Title</h4>
-                                <p class="font-italic">Kategori Adı</p>
+                                <h4 class="h5 text-white mb-0">@item.Title</h4>
+                                <p class="font-italic text-white-50 small mt-1">
+                                    @(item.Category != null ? item.Category.CategoryName : "Genel")
+                                </p>
                             </div>
                         </a>
                     </div>
@@ -32,11 +34,20 @@
 
 <style>
     /* PORTFOLIO GRID EFFECT */
-    .portfolio-item .item-media img {
+    .item-media {
         width: 100%;
-        transition: transform .3s ease;
+        height: 220px;
+        overflow: hidden;
+        position: relative;
     }
 
+    .portfolio-item .item-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform .3s ease;
+    }
     .portfolio-item:hover .item-media img {
         transform: scale(1.05);
     }
@@ -119,28 +130,26 @@
     }
 </style>
 
-<!-- jQuery + Magnific Popup JS -->
+<!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Magnific Popup -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 
-<!-- Gallery Popup Script -->
 <script>
-    $(document).ready(function() {
-        $('.image-popup').magnificPopup({
-            type: 'image',
-            gallery: {
-                enabled: true,
-                tPrev: 'Önceki',
-                tNext: 'Sonraki',
-                tCounter: '<span class="mfp-counter">%curr% / %total%</span>'
-            },
-            image: {
-                titleSrc: 'title'
-            },
-            zoom: {
-                enabled: true,
-                duration: 300
-            }
-        });
+    $(document).ready(function () {
+
+    $('.image-popup').magnificPopup({
+    type: 'image',
+
+    gallery: {
+    enabled: true
+    },
+
+    image: {
+    titleSrc: 'title'
+    }
+    });
+
     });
 </script>

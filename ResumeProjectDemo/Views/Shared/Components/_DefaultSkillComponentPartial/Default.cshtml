@@ -1,4 +1,5 @@
-﻿<section id="skills" class="bg-light">
+﻿@model List<ResumeProjectDemo.Entities.Skill>
+<section id="skills" class="bg-light">
 	<div class="container">
 		<div class="row mb-8">
 			<div class="col-lg-10 col-xl-8 mx-lg-auto text-center">
@@ -14,44 +15,23 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-6 mb-4 mb-md-0">
-				<p class="h6 mb-1">JavaScript & Node.js</p>
-				<div class="progress mb-6 rounded-0" style="height:5px">
-					<div class="progress-bar" style="width: 85%"></div>
+			@foreach (var item in Model)
+			{
+				<div class="col-md-6 mb-4 mb-md-0">
+					<p class="h6 mb-1">@item.Title</p>
+					<div class="progress mb-6 rounded-0" style="height:5px">
+						<div class="progress-bar" style="width: @item.Value%"></div>
+					</div>
 				</div>
 
-				<p class="h6 mb-1">.NET & C#</p>
-				<div class="progress mb-6 rounded-0" style="height:5px">
-					<div class="progress-bar" style="width: 70%"></div>
-				</div>
+				<div class="col-md-6">
+					<p class="h6 mb-1">@item.Title2</p>
+					<div class="progress mb-6 rounded-0" style="height:5px">
+						<div class="progress-bar" style="width: @item.Value2%"></div>
+					</div>
 
-				<p class="h6 mb-1">Express.js / REST API</p>
-				<div class="progress rounded-0 mb-6" style="height:5px">
-					<div class="progress-bar" style="width: 80%"></div>
 				</div>
-
-				<p class="h6 mb-1">NestJS</p>
-				<div class="progress rounded-0" style="height:5px">
-					<div class="progress-bar" style="width: 75%"></div>
-				</div>
-			</div>
-
-			<div class="col-md-6">
-				<p class="h6 mb-1">PostgreSQL & Database Design</p>
-				<div class="progress mb-6 rounded-0" style="height:5px">
-					<div class="progress-bar" style="width: 75%"></div>
-				</div>
-
-				<p class="h6 mb-1">System Design & Backend Architecture</p>
-				<div class="progress rounded-0 mb-6" style="height:5px">
-					<div class="progress-bar" style="width: 80%"></div>
-				</div>
-
-				<p class="h6 mb-1">Problem Solving & Analytical Thinking</p>
-				<div class="progress rounded-0" style="height:5px">
-					<div class="progress-bar" style="width: 85%"></div>
-				</div>
-			</div>
+			}
 		</div>
 	</div>
 </section>
